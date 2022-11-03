@@ -34,15 +34,17 @@
 		%>
 		<tr>
 			<td><%=notiList.size()-i %></td>
-			<td><a href="GetBoardDetailCtrl?notiNo=<%=vo.getNotiNo() %>"><%=vo.getTitle() %></a></td>
+			<td><a href="<%=request.getContextPath() %>/GetBoardDetailCtrl?notiNo=<%=vo.getNotiNo() %>"><%=vo.getTitle() %></a></td>
 			<td><%=vo.getResDate() %></td>
 		</tr>
 		<% } %>	
 		</tbody>
 	</table>
+	<% if(sid.equals("admin")) { %>
 	<div class="btn-group">
-		<a href="./notice/insertBoard.jsp" class="btn btn-danger">글 등록</a>
+		<a href="<%=request.getContextPath() %>/notice/insertBoard.jsp" class="btn btn-danger">글 등록</a>
 	</div>
+	<% } %>
 </div>
 <%@ include file="../footer.jsp" %>
 </body>

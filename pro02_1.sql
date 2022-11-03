@@ -30,3 +30,9 @@ commit;
 
 select * from notice order by notiNo desc;
 
+select * from custom;
+
+update custom set cuspw="ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f" where cusid="kkt09072";
+update custom set cuspw="03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4" where cusid="admin";
+update custom set level=9 where cusid="admin";
+commit;

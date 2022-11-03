@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.myshop.app.D;
+import kr.co.myshop.vo.Custom;
 import kr.co.myshop.vo.Notice;
 
-@WebServlet("/GetBoardListCtrl")
-public class GetBoardListCtrl extends HttpServlet {
+@WebServlet("/GetCustomListCtrl")
+public class GetCustomListCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private final static String URL = "jdbc:mysql://localhost:3306/myshop1?serverTimezone=Asia/Seoul";
@@ -31,26 +31,30 @@ public class GetBoardListCtrl extends HttpServlet {
 		try {
 			//데이터베이스 연결
 			Class.forName(DRIVER);
-			sql = "select * from notice order by notino desc";
+			sql = "select * from custom order by regdate desc";
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
 			//결과를 데이터베이스로 부터 받아서 리스트로 저장
-			List<Notice> notiList = new ArrayList<Notice>();
+			List<Custom> cusList = new ArrayList<Custom>();
 			while(rs.next()){
-				Notice vo = new Notice();
-				vo.setNotiNo(rs.getInt("notino"));
-				vo.setTitle(rs.getString("title"));
-				vo.setContent(rs.getString("content"));
-				vo.setAuthor(rs.getString("author"));
-				vo.setResDate(rs.getString("resdate"));
-				notiList.add(vo);
+				Custom vo = new Custom();
+				vo.setCusId(rs.getString("cusid"));
+				vo.setCusPw(rs.getString("cuspw"));
+				vo.setCusName(rs.getString("cusname"));
+				vo.setAddress(rs.getString("address"));
+				vo.setTel(rs.getString("tel"));
+				vo.setRegDate(rs.getString("regdate"));
+				vo.setPoint(rs.getInt("point"));
+				vo.setLevel(rs.getInt("level"));
+				vo.setVisited(rs.getInt("visited"));
+				cusList.add(vo);
 			}
-			request.setAttribute("notiList", notiList);
+			request.setAttribute("cusList", cusList);
 			
 			//notice/boardList.jsp 에 포워딩
-			RequestDispatcher view = request.getRequestDispatcher("./notice/boardList.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("./admin/customList.jsp");
 			view.forward(request, response);
 			
 			rs.close();

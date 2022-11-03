@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%
+	String sid = (String) session.getAttribute("sid");
+	String sname = (String) session.getAttribute("sname");
+%>
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
 	<div class="in_container"> 
 	  <a class="navbar-brand" id="logo" href="index.jsp">MONSELFIT</a>
@@ -35,16 +39,40 @@
 	          Community
 	        </a>
 	        <div class="dropdown-menu">
-	          <a class="dropdown-item" href="GetBoardListCtrl">Notice</a>
+	          <a class="dropdown-item" href="<%=request.getContextPath() %>/GetBoardListCtrl">Notice</a>
 	          <a class="dropdown-item" href="#">Q&A</a>
 	          <a class="dropdown-item" href="#">Use After</a>
 	        </div>
 	      </li>
 	    </ul>
-	    <form class="form-inline my-2 my-lg-0">
-	      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	    </form>
+		<ul class="nav justify-content-end">
+		  <% if(sid!=null) { %>
+			  <li class="nav-item">
+			    <span class="nav-link"><%=sname %>님</span>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link active" href="<%=request.getContextPath() %>/LogOutCtrl">로그아웃</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="<%=request.getContextPath() %>/GetCustomInfoCtrl">회원정보</a>
+			  </li>
+			  <% if(sid.equals("admin")) { %>
+				  <li class="nav-item">
+				    <a class="nav-link" href="<%=request.getContextPath() %>/admin/index.jsp">관리자 페이지로</a>
+				  </li>
+			  <% } %>
+		  <% } else { %>
+			  <li class="nav-item">
+			    <a class="nav-link active" href="<%=request.getContextPath() %>/custom/login.jsp">로그인</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="<%=request.getContextPath() %>/custom/membership.jsp">회원가입</a>
+			  </li>
+		  <% } %>
+		  <li class="nav-item">
+		    <a class="nav-link" href="#">Contact</a>
+		  </li>
+		</ul>	    
 	  </div>
 	</div>
 </nav>
