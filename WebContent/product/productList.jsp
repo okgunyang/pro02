@@ -45,6 +45,13 @@
 			</div>
 		</li>
 	<% } %>
+	<% if(proList.size()==0){ %>
+		<li style="width:1000px;">
+			<hr>
+			<p>해당 카테고리의 상품이 존재하지 않습니다.</p>
+			<hr>
+		</li>
+	<% } %>
 	</ul>
 	<% if(sid.equals("admin")) { %>
 	<div class="btn-group">
