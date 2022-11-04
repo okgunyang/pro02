@@ -6,7 +6,7 @@ public class Sales {
 	private String proNo;	//제품번호
 	private int amount;	//판매수량
 	private String saleDate;//판매일
-	private int parselNo;	//배송번호
+	private int parselNo;	//배송코드
 	private int salePayNo;	//결제번호
 	public int getSaleNo() {
 		return saleNo;
