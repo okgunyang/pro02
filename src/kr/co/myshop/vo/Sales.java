@@ -8,6 +8,7 @@ public class Sales {
 	private String saleDate;//(default)판매일
 	private int parselNo;	//(*parsel)배송코드
 	private int salePayNo;	//(*payment)결제번호
+	private int parselState;
 	public int getSaleNo() {
 		return saleNo;
 	}
@@ -49,5 +50,11 @@ public class Sales {
 	}
 	public void setSalePayNo(int salePayNo) {
 		this.salePayNo = salePayNo;
+	}
+	public int getParselState() {
+		return parselState;
+	}
+	public void setParselState(int parselState) {
+		this.parselState = parselState;
 	}
 }

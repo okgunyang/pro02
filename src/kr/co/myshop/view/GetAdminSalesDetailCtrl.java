@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.myshop.vo.Sales;
 
-@WebServlet("/GetSalesDetailCtrl")
-public class GetSalesDetailCtrl extends HttpServlet {
+@WebServlet("/GetAdminSalesDetailCtrl")
+public class GetAdminSalesDetailCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private final static String URL = "jdbc:mysql://localhost:3306/myshop1?serverTimezone=Asia/Seoul";
@@ -52,7 +52,7 @@ public class GetSalesDetailCtrl extends HttpServlet {
 			request.setAttribute("sales", vo);
 			
 			//notice/boardList.jsp 에 포워딩
-			RequestDispatcher view = request.getRequestDispatcher("./sales/salesDetail.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("./admin/salesDetail.jsp");
 			view.forward(request, response);
 			
 			rs.close();

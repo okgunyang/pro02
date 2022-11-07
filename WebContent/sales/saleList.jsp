@@ -49,9 +49,6 @@
 				<% } %>	
 				</tbody>
 			</table>
-<%-- 			<div class="btn-group">
-				<a href="<%=request.getContextPath() %>/DeleteSaleCtrl?saleNo=<%= %>" class="btn btn-danger">구매 취소</a>
-			</div> --%>
 		</main>
 </div>
 </div>
