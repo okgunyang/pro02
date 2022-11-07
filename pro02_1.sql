@@ -1,6 +1,8 @@
+-- 데이터베이스 생성
 create database myshop1;
-commit;
+-- 데이터베이스 선택
 use myshop1;
+-- 고객 테이블 생성
 create table custom(
 	cusId varchar(13) primary key,	
 	cusPw varchar(200) not null,
@@ -13,6 +15,7 @@ create table custom(
 	visited int default 0
 );
 
+-- 공지사항 테이블 생성
 create table notice(
 	notiNo int primary key auto_increment,
 	title varchar(200) not null,
@@ -20,7 +23,16 @@ create table notice(
 	author varchar(20) not null,
 	resDate datetime default now()
 );
+-- 공지사항 테이블 구조 보기
+desc notice;
 
+-- 공지사항의 방문횟수 컬럼 추가
+alter table notice add column visited int default 0;
+
+-- 공지사항의 방문횟수 컬럼 제거
+alter table notice drop column visited;
+
+-- 공지사항의 더미 데이터 추가
 insert into notice(title, content, author) values ("테스트 제목1", "테스트1 내용입니다.", "admin");
 insert into notice(title, content, author) values ("테스트 제목2", "테스트2 내용입니다.", "admin");
 insert into notice(title, content, author) values ("테스트 제목3", "테스트3 내용입니다.", "admin");
@@ -28,20 +40,25 @@ insert into notice(title, content, author) values ("테스트 제목4", "테스�
 insert into notice(title, content, author) values ("테스트 제목5", "테스트5 내용입니다.", "admin");
 commit;
 
+-- 공지사항의 글번호의 내림차순 조회
 select * from notice order by notiNo desc;
 
+-- 고객 테이블 조회
 select * from custom;
-
+-- 고객 비밀번호의 암호화
 update custom set cuspw="ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f" where cusid="kkt09072";
 update custom set cuspw="03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4" where cusid="admin";
+-- 관리자의 등급 변경
 update custom set level=9 where cusid="admin";
 commit;
 
+-- 카테고리 테이블 생성
 create table category(
 	cateNo int primary key auto_increment,
 	cateName varchar(50)
 );
 
+-- 카테고리 데이터 등록
 insert into category(cateName) values ("SUIT");
 insert into category(cateName) values ("OUTER");
 insert into category(cateName) values ("TOP");
@@ -52,6 +69,7 @@ insert into category(cateName) values ("BAG");
 select * from category;
 commit;
 
+-- 제품 테이블 생성
 create table product(
 	proNo int primary key auto_increment,
 	cateNo int not null,
@@ -64,9 +82,57 @@ create table product(
 );
 
 commit;
-
 select * from product;
-
 delete from product;
-
 drop table product;
+
+-- 입고 테이블 생성
+create table wearing(
+	proNo int primary key,
+    amount int
+);
+
+desc wearing;
+
+select * from wearing;
+
+-- 판매 테이블 생성
+create table sales(
+	saleNo int primary key auto_increment,
+    cusId varchar(13) not null,
+    proNo int not null,
+    amount int not null,
+    saleDate datetime default now(),
+    parselNo int,
+    salePayNo int
+);
+
+desc sales;
+select * from sales;
+
+-- 결제 테이블 생성
+create table payment(
+	salePayNo int primary key auto_increment,
+    payMethod varchar(20),
+    payCom varchar(50),
+    cardNum varchar(40),
+    payAmount int
+);
+
+desc payment;
+select * from payment;
+
+-- 배송 테이블 생성
+create table parsel(
+	parselNo int primary key auto_increment,
+    parselAddr varchar(500),
+    cusTel varchar(14),
+    parselCompany varchar(50),
+    parselTel varchar(14),
+    parselState int default 0
+);    
+
+desc parsel;
+select * from parsel;
+drop table parsel;
+

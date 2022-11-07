@@ -12,19 +12,19 @@
 	<h2>결제 모듈 API</h2>
 	<br>
 	<div id="pay">
-	<h4>
-		<label><input type="checkbox" value="1000">1000원</label>
-		<label><input type="checkbox" value="5000">5000원</label>
-		<label><input type="checkbox" value="10000">10000원</label>
-		<label><input type="checkbox" value="50000">50000원</label>
-	</h4>
-	<h3>
-	총 결제 금액
-	<span style="dispaly:inline-block; width:150px; text-align:right;"></span>
-	원
-	</h3>
-	<button class="btn btn-info">결제하기</button>
-	<p id="paymentResult"></p>
+		<h4>
+			<label><input type="checkbox" value="1000">1000원</label>
+			<label><input type="checkbox" value="5000">5000원</label>
+			<label><input type="checkbox" value="10000">10000원</label>
+			<label><input type="checkbox" value="50000">50000원</label>
+		</h4>
+		<h3>
+		총 결제 금액
+		<span style="dispaly:inline-block; width:150px; text-align:right;"></span>
+		원
+		</h3>
+		<button class="btn btn-info">결제하기</button>
+		<p id="paymentResult"></p>
 	</div>
 	<hr>
 	<script>

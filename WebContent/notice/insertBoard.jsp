@@ -20,31 +20,42 @@
 <%
 	Notice vo = (Notice) request.getAttribute("notice");
 %>
-<div class="content container" id="content">
-	<h2 class="title">공지사항 등록</h2>
-	<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/InsertBoardProCtrl" method="post">
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="title" id="title" placeholder="제목 입력" class="form-control" autofocus required /></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea cols="80" rows="6" name="content" id="content" class="form-control" required></textarea></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td><input type="text" name="author" id="author" value="admin" class="form-control" readonly></td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="btn-group">
-			<input type="submit" name="submit-btn" class="btn btn-info" value="글 등록">
-			<input type="reset" name="reset-btn" class="btn btn-info" value="취소">
-			<a href="<%=request.getContextPath() %>/GetBoardListCtrl" class="btn btn-danger">목록으로</a>
-		</div>
-	</form>	
+<div class="container-fluid" id="content">
+	<div class="row" id="content_row">
+		<% if(sid!=null && sid.equals("admin")) { %>
+		<%@ include file="../admin/admin_sidebar.jsp" %>
+		<% } %>
+		<% if(sid!=null && sid.equals("admin")) { %>
+		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+		<% } else { %>
+		<main class="content container">
+		<% } %>
+			<h2 class="title">공지사항 등록</h2>
+			<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/InsertBoardProCtrl" method="post">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>제목</th>
+							<td><input type="text" name="title" id="title" placeholder="제목 입력" class="form-control" autofocus required /></td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td><textarea cols="80" rows="6" name="content" id="content" class="form-control" required></textarea></td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td><input type="text" name="author" id="author" value="admin" class="form-control" readonly></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="btn-group">
+					<input type="submit" name="submit-btn" class="btn btn-info" value="글 등록">
+					<input type="reset" name="reset-btn" class="btn btn-info" value="취소">
+					<a href="<%=request.getContextPath() %>/GetBoardListCtrl" class="btn btn-danger">목록으로</a>
+				</div>
+			</form>	
+		</main>
+	</div>
 </div>
 <%@ include file="../footer.jsp" %>
 </body>

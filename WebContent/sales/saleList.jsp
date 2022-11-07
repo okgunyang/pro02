@@ -6,12 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>공지사항 목록</title>
+<title>구매 목록</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="common.css">
-
 <style>
 .title { padding-top:36px; padding-bottom:20px; }
 </style>
@@ -19,7 +18,7 @@
 <body>
 <%@ include file="../header.jsp" %>
 <%
-	Notice vo = (Notice) request.getAttribute("notice");
+	List<Sales> saleList = (ArrayList<Sales>) request.getAttribute("saleList");
 %>
 <div class="container-fluid" id="content">
 	<div class="row" id="content_row">
@@ -31,44 +30,30 @@
 		<% } else { %>
 		<main class="content container">
 		<% } %>
-			<h2 class="title">공지사항 목록</h2>
+			<h2 class="title">구매 목록</h2>
 			<table class="table">
+				<thead>
+					<tr>
+						<th>연번</th><th>제목</th><th>작성일</th>
+					</tr>
+				</thead>
 				<tbody>
-					<tr>
-						<th>번호</th>
-						<td><%=vo.getNotiNo() %></td>
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td><%=vo.getTitle() %></td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td><%=vo.getContent() %></td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td><%=vo.getAuthor() %></td>
-					</tr>
-					<tr>
-						<th>작성일시</th>
-						<td><%=vo.getResDate() %></td>
-					</tr>
-					<tr>
-						<th>읽은 횟수</th>
-						<td><%=vo.getVisited() %></td>
-					</tr>
+				<% for(int i=0;i<saleList.size();i++){
+					Sales vo = saleList.get(i);
+				%>
+				<tr>
+					<td><%=saleList.size()-i %></td>
+					<td><a href="<%=request.getContextPath() %>/GetSalesDetailCtrl?saleNo=<%=vo.getSaleNo() %>"><%=vo.getProNo() %></a></td>
+					<td><%=vo.getSaleDate() %></td>
+				</tr>
+				<% } %>	
 				</tbody>
 			</table>
-			<div class="btn-group">
-				<a href="<%=request.getContextPath() %>/GetBoardListCtrl" class="btn btn-danger">목록으로</a>
-				<% if(sid!=null && sid.equals("admin")) { %>
-				<a href="<%=request.getContextPath() %>/DeleteBoardCtrl?notiNo=<%=vo.getNotiNo() %>" class="btn btn-primary">글 삭제</a>
-				<a href="<%=request.getContextPath() %>/UpdateBoardCtrl?notiNo=<%=vo.getNotiNo() %>" class="btn btn-danger">글 수정</a>
-				<% } %>
-			</div>
+<%-- 			<div class="btn-group">
+				<a href="<%=request.getContextPath() %>/DeleteSaleCtrl?saleNo=<%= %>" class="btn btn-danger">구매 취소</a>
+			</div> --%>
 		</main>
-	</main>		
+</div>
 </div>
 <%@ include file="../footer.jsp" %>
 </body>

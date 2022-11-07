@@ -28,9 +28,13 @@ public class GetProductDetailCtrl extends HttpServlet {
 		int proNo = Integer.parseInt(request.getParameter("proNo"));
 		try {
 			//데이터베이스 연결
-			Class.forName(DRIVER);
-			sql = "select * from product where prono=?";
+			Class.forName(DRIVER);		
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
+			sql = "select a.prono, a.cateno, a.proname, a.prospec, a.oriprice, ";			
+			sql = sql + "a.discountrate, a.propic, a.propic2, b.amount from ";
+			sql = sql + "product a right join wearing b on a.prono=b.prono ";
+			sql = sql + "where a.prono in (select b.prono from wearing) and ";
+			sql = sql + "a.prono=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, proNo);
 			ResultSet rs = pstmt.executeQuery();
@@ -46,6 +50,27 @@ public class GetProductDetailCtrl extends HttpServlet {
 				vo.setDiscountRate(rs.getDouble("discountrate"));
 				vo.setProPic(rs.getString("propic"));
 				vo.setProPic2(rs.getString("propic2"));
+				vo.setAmount(rs.getInt("amount"));
+			} else {
+				rs.close();
+				pstmt.close();
+				pstmt = null;
+				rs = null;
+				sql = "select * from product where prono=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, proNo);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					vo.setProNo(rs.getInt("prono"));
+					vo.setCateNo(rs.getInt("cateno"));
+					vo.setProName(rs.getString("proname"));
+					vo.setProSpec(rs.getString("prospec"));
+					vo.setOriPrice(rs.getInt("oriprice"));
+					vo.setDiscountRate(rs.getDouble("discountrate"));
+					vo.setProPic(rs.getString("propic"));
+					vo.setProPic2(rs.getString("propic2"));
+					vo.setAmount(0);
+				}
 			}
 			request.setAttribute("pro", vo);
 			

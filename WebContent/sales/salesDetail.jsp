@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>공지사항 목록</title>
+<title>구매 상세 내역 페이지</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -19,7 +19,7 @@
 <body>
 <%@ include file="../header.jsp" %>
 <%
-	Notice vo = (Notice) request.getAttribute("notice");
+	Sales vo = (Sales) request.getAttribute("sales");
 %>
 <div class="container-fluid" id="content">
 	<div class="row" id="content_row">
@@ -31,40 +31,40 @@
 		<% } else { %>
 		<main class="content container">
 		<% } %>
-			<h2 class="title">공지사항 목록</h2>
+			<h2 class="title">구매 상세 내역</h2>
 			<table class="table">
 				<tbody>
 					<tr>
-						<th>번호</th>
-						<td><%=vo.getNotiNo() %></td>
+						<th>구매 번호</th>
+						<td><%=vo.getSaleNo() %></td>
 					</tr>
 					<tr>
-						<th>제목</th>
-						<td><%=vo.getTitle() %></td>
+						<th>구매 제품 번호</th>
+						<td><%=vo.getProNo() %></td>
 					</tr>
 					<tr>
-						<th>내용</th>
-						<td><%=vo.getContent() %></td>
+						<th>구매 수량</th>
+						<td><%=vo.getAmount() %></td>
 					</tr>
 					<tr>
-						<th>작성자</th>
-						<td><%=vo.getAuthor() %></td>
+						<th>구매일</th>
+						<td><%=vo.getSaleDate() %></td>
 					</tr>
 					<tr>
-						<th>작성일시</th>
-						<td><%=vo.getResDate() %></td>
+						<th>배송번호</th>
+						<td><%=vo.getParselNo() %></td>
 					</tr>
 					<tr>
-						<th>읽은 횟수</th>
-						<td><%=vo.getVisited() %></td>
+						<th>결제번호</th>
+						<td><%=vo.getProNo() %></td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="btn-group">
-				<a href="<%=request.getContextPath() %>/GetBoardListCtrl" class="btn btn-danger">목록으로</a>
-				<% if(sid!=null && sid.equals("admin")) { %>
-				<a href="<%=request.getContextPath() %>/DeleteBoardCtrl?notiNo=<%=vo.getNotiNo() %>" class="btn btn-primary">글 삭제</a>
-				<a href="<%=request.getContextPath() %>/UpdateBoardCtrl?notiNo=<%=vo.getNotiNo() %>" class="btn btn-danger">글 수정</a>
+				<a href="<%=request.getContextPath() %>/GetMemberSalesInfoCtrl" class="btn btn-danger">목록으로</a>
+				<% if(vo.getCusId().equals(sid)) { %>
+				<a href="<%=request.getContextPath() %>/DeleteSalesCtrl?saleNo=<%=vo.getSaleNo() %>" class="btn btn-primary">결제 취소</a>
+				<a href="<%=request.getContextPath() %>/UpdateSalesCtrl?parselNo=<%=vo.getParselNo() %>" class="btn btn-danger">배송 정보 수정</a>
 				<% } %>
 			</div>
 		</main>

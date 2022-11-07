@@ -10,6 +10,7 @@ public class Product {
 	private int proPrice;	//계산된 데이터 : 판매가격 = 원가*(1-할인율)
 	private String proPic;	//상품이미지1
 	private String proPic2;	//상품이미지2
+	private int amount; 	//재고수량
 	public int getProNo() {
 		return proNo;
 	}
@@ -63,5 +64,11 @@ public class Product {
 	}
 	public void setProPrice() {
 		this.proPrice = (int) (this.oriPrice * (1 - this.discountRate));
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 }

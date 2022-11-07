@@ -1,0 +1,16 @@
+트랜잭션 처리
+
+conn = DriverManager.getConnection(.....
+
+conn.setAutoCommit(false);	//SQL 구문이 각자 커밋되지 않도록 자동커밋모드를 비활성화
+sql = "SQL문1";
+pstmt = conn.prepareStatment(sql);
+pstmt.setString(1,....
+pstmt.executeUpdate();
+
+sql = "SQL문2"
+pstmt = conn.prepareStatment(sql);
+pstmt.setString(1,....
+pstmt.executeUpdate();
+conn.commit();	//SQL구문을 모두 성공처리
+conn.setAutoCommit(true);	//다음 SQL 구문이 오토커밋되도록 활성화

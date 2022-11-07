@@ -56,6 +56,9 @@
 			  <li class="nav-item">
 			    <a class="nav-link" href="<%=request.getContextPath() %>/GetCustomInfoCtrl">회원정보</a>
 			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="<%=request.getContextPath() %>/GetMemberSalesInfoCtrl">구매내역</a>
+			  </li>
 			  <% if(sid.equals("admin")) { %>
 				  <li class="nav-item">
 				    <a class="nav-link" href="<%=request.getContextPath() %>/admin/index.jsp">관리자 페이지로</a>
