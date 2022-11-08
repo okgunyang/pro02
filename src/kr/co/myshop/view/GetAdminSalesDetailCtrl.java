@@ -51,7 +51,7 @@ public class GetAdminSalesDetailCtrl extends HttpServlet {
 			}
 			request.setAttribute("sales", vo);
 			
-			//notice/boardList.jsp 에 포워딩
+			//admin/salesDetail.jsp 에 포워딩
 			RequestDispatcher view = request.getRequestDispatcher("./admin/salesDetail.jsp");
 			view.forward(request, response);
 			

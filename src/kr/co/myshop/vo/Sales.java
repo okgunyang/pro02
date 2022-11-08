@@ -9,6 +9,7 @@ public class Sales {
 	private int parselNo;	//(*parsel)배송코드
 	private int salePayNo;	//(*payment)결제번호
 	private int parselState;
+	private String parselCompany;
 	public int getSaleNo() {
 		return saleNo;
 	}
@@ -56,5 +57,11 @@ public class Sales {
 	}
 	public void setParselState(int parselState) {
 		this.parselState = parselState;
+	}
+	public String getParselCompany() {
+		return parselCompany;
+	}
+	public void setParselCompany(String parselCompany) {
+		this.parselCompany = parselCompany;
 	}
 }

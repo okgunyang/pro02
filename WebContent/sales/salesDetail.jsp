@@ -58,6 +58,28 @@
 						<th>결제번호</th>
 						<td><%=vo.getProNo() %></td>
 					</tr>
+					<tr>
+						<th>배송상태</th>
+						<td>
+							<% if(vo.getParselState()==0) { %>
+							<span>배송전</span>
+							<% } else if(vo.getParselState()==1) { %>
+							<span>배송중</span>
+							<% } else if(vo.getParselState()==2) { %>
+							<span>도착</span>
+							<% } else if(vo.getParselState()==3) { %>
+							<span>구매결정 완료</span>
+							<% } %>
+							<br><br>
+							<%
+							Parsel parsel = new Parsel();
+							
+							%>
+							<% if(vo.getParselState()!=0) { %>
+							<a href="<%=parsel.getParselUrl(vo.getParselCompany()) %>=<%=vo.getParselNo() %>" target="_blank"><%=vo.getParselCompany() %>배송조회</a>	
+							<% } %>	
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<div class="btn-group">

@@ -34,7 +34,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>연번</th><th>제목</th><th>작성일</th>
+						<th>연번</th><th>구매내역</th><th>구매일시</th>
 					</tr>
 				</thead>
 				<tbody>
