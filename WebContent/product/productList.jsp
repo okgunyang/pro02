@@ -27,7 +27,18 @@
 <%@ include file="../header.jsp" %>
 <%
 	List<Product> proList = (ArrayList<Product>) request.getAttribute("proList");
+	if(sid!=null) {
+		sid = sid;
+	} else {
+		sid = "guest";
+	}
 %>
+<nav aria-label="breadcrumb bg-light" style="clear:both;height:48px;width:100vw;border-bottom:3px solid #999;">
+  <ol class="breadcrumb bg-transparent" style="float:right;">
+    <li class="breadcrumb-item"><a href="<%=request.getContextPath() %>/index.jsp">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">제품목록</li>
+  </ol>
+</nav>
 <div class="container-fluid" id="content">
 	<div class="row" id="content_row">
 		<% if(sid!=null && sid.equals("admin")) { %>
