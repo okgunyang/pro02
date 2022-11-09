@@ -51,11 +51,12 @@ public class GetProductListCtrl extends HttpServlet {
 				proList.add(vo);
 			}
 			request.setAttribute("proList", proList);
+			request.setAttribute("cateNo", 9);
 			
 			//notice/boardList.jsp 에 포워딩
 			RequestDispatcher view = request.getRequestDispatcher("./product/productList.jsp");
 			view.forward(request, response);
-			
+
 			rs.close();
 			pstmt.close();
 			con.close();

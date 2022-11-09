@@ -57,11 +57,26 @@
 		sid = "guest";
 	}
 %>
-<nav aria-label="breadcrumb bg-light" style="clear:both;height:64px;width:100%;border-bottom:3px solid #999;box-sizing:border-box;overflow:hidden;">
-  <ol class="breadcrumb bg-transparent" style="float:right;padding-right:2rem;">
+<nav aria-label="breadcrumb bg-light" style="clear:both;height:64px;width:100vw;border-bottom:3px solid #999;">
+  <ol class="breadcrumb bg-transparent" style="float:right;">
     <li class="breadcrumb-item"><a href="<%=request.getContextPath() %>/index.jsp">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><%=cateName %></li>
+    <li class="breadcrumb-item active" aria-current="page">
+    	<select name="cateNo" id="cateNo" class="form-control" onchange="fnc1()">
+    		<option value="<%=request.getContextPath() %>/GetProductListCtrl">전체</option>
+			<option value="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=1">SUIT</option>
+			<option value="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=2">OUTER</option>
+			<option value="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=3">TOP</option>
+			<option value="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=4">PANTS</option>
+			<option value="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=5">SHOES</option>
+			<option value="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=6">BAG</option>
+    	</select>
+    </li>
   </ol>
+  <script>
+  function fnc1(){
+	  location.href = $("#cateNo").val();
+  }
+  </script>
 </nav>
 <div class="container-fluid" id="content">
 	<div class="row" id="content_row">

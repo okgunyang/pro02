@@ -53,6 +53,7 @@ public class GetProductItemListCtrl extends HttpServlet {
 				proList.add(vo);
 			}
 			request.setAttribute("proList", proList);
+			request.setAttribute("cateNo", cateNo);
 			
 			//notice/boardList.jsp 에 포워딩
 			RequestDispatcher view = request.getRequestDispatcher("./product/productList.jsp");

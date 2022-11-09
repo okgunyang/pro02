@@ -18,3 +18,4 @@ left:50%; margin-left:-111px; display:block; padding-left:20px; padding-right:20
 .ft_ico_lst li { float:left; width:25%; }
 .ft_ico_lst li a { display:block; padding:6px; }
 .ft_ico_lst li img { display:block; width:100%; height:auto; }
+html, body { overflow-x:hidden; margin:0; padding:0; }

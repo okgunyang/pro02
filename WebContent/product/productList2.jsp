@@ -57,8 +57,8 @@
 		sid = "guest";
 	}
 %>
-<nav aria-label="breadcrumb bg-light" style="clear:both;height:64px;width:100%;border-bottom:3px solid #999;box-sizing:border-box;overflow:hidden;">
-  <ol class="breadcrumb bg-transparent" style="float:right;padding-right:2rem;">
+<nav aria-label="breadcrumb bg-light" style="clear:both;height:64px;width:100vw;border-bottom:3px solid #999;">
+  <ol class="breadcrumb bg-transparent" style="float:right;">
     <li class="breadcrumb-item"><a href="<%=request.getContextPath() %>/index.jsp">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page"><%=cateName %></li>
   </ol>
@@ -73,6 +73,30 @@
 		<% } else { %>
 		<main class="content container">
 		<% } %>
+			<div class="btn-group" id="btn_grp1" style="margin-top:40px;">
+				<a href="<%=request.getContextPath() %>/GetProductListCtrl" class="btn btn-primary">전체</a>
+				<a href="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=1" class="btn btn-outline-primary">SUIT</a>
+				<a href="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=2" class="btn btn-outline-primary">OUTER</a>
+				<a href="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=3" class="btn btn-outline-primary">TOP</a>
+				<a href="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=4" class="btn btn-outline-primary">PANTS</a>
+				<a href="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=5" class="btn btn-outline-primary">SHOES</a>
+				<a href="<%=request.getContextPath() %>/GetProductItemListCtrl?cateNo=6" class="btn btn-outline-primary">BAG</a>
+			</div>
+			<script>
+			$(document).ready(function(){
+				var url = location.href;
+				var loc = url.indexOf("=");
+				var url2 = parseInt(url.substr(loc+1, url.length-1));
+				console.log(url2);
+				if(isNaN(url2)){
+					$("#btn_grp1 a").removeClass("btn-primary").addClass("btn-outline-primary");
+					$("#btn_grp1 a").eq(0).removeClass("btn-outline-primary").addClass("btn-primary");
+				} else {
+					$("#btn_grp1 a").removeClass("btn-primary").addClass("btn-outline-primary");
+					$("#btn_grp1 a").eq(url2).removeClass("btn-outline-primary").addClass("btn-primary");
+				}
+			});	
+			</script>
 			<h2 class="title"><%=cateName %></h2>
 			<ul class="row" id="best">
 			<% for(int i=0;i<proList.size();i++) {
