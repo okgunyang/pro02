@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, java.util.*, java.text.*, kr.co.myshop.vo.*, kr.co.myshop.view.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,93 +14,76 @@
 <style>
 .in_container { clear:both; width:1400px; margin:0 auto; }
 .in_container:after { content:""; display:block; clear:both; }
+.card-title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.card-text {   overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;
+  -webkit-line-clamp: 2;  -webkit-box-orient: vertical; }
+#best, #new, #hot { margin-bottom:40px; }  
+#best li, #new li, #hot li   { margin-bottom:24px; } 
+.cate_title { padding-top:24px; padding-bottom:24px; padding-left:36px; } 
 </style>
 </head>
 <body>
+<%
+	GetIndexProductListCtrl indexPro = new GetIndexProductListCtrl();
+	ArrayList<Product> bestPro = indexPro.bestProduct();
+	ArrayList<Product> hotPro = indexPro.hotProduct();
+	ArrayList<Product> newPro = indexPro.newProduct();
+%>
 <%@ include file="header.jsp" %>
 <div class="container" id="content">
-<ul class="row" id="best">
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-	<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-		<div class="card" style="width: 18rem;">
-		  <img src="./img/dummy.svg" class="card-img-top" alt="더미이미지">
-		  <div class="card-body">
-		    <h5 class="card-title">Card title</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Go somewhere</a>
-		  </div>
-		</div>
-	</li>
-</ul>
+	<h2 class="cate_title">NEW</h2>
+	<ul class="row" id="new">
+		<% for(int i=0;i<newPro.size();i++) { 
+			Product vo = newPro.get(i);
+		%>	
+		<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+			<div class="card" style="width: 18rem;">
+			  <img src="upload/<%=vo.getProPic() %>" class="card-img-top" alt="<%=vo.getProName() %>">
+			  <div class="card-body">
+			    <h5 class="card-title"><%=vo.getProName() %></h5>
+			    <p class="card-text"><%=vo.getProSpec() %></p>
+			    <a href="<%=request.getContextPath() %>/GetProductDetailCtrl?proNo=<%=vo.getProNo() %>" class="btn btn-primary">자세히 보기</a>
+			  </div>
+			</div>
+		</li>
+		<% } %>
+	</ul>
+	<br><hr><br>
+	<h2 class="cate_title">HOT</h2>
+	<ul class="row" id="hot">
+		<% for(int i=0;i<hotPro.size();i++) { 
+			Product vo = hotPro.get(i);
+		%>	
+		<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+			<div class="card" style="width: 18rem;">
+			  <img src="upload/<%=vo.getProPic() %>" class="card-img-top" alt="<%=vo.getProName() %>">
+			  <div class="card-body">
+			    <h5 class="card-title"><%=vo.getProName() %></h5>
+			    <p class="card-text"><%=vo.getProSpec() %></p>
+			    <a href="<%=request.getContextPath() %>/GetProductDetailCtrl?proNo=<%=vo.getProNo() %>" class="btn btn-primary">자세히 보기</a>
+			  </div>
+			</div>
+		</li>
+		<% } %>
+	</ul>
+	<br><hr><br>
+	<h2 class="cate_title">BEST</h2>
+	<ul class="row" id="best">
+		<% for(int i=0;i<bestPro.size();i++) { 
+			Product vo = bestPro.get(i);
+		%>	
+		<li class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+			<div class="card" style="width: 18rem;">
+			  <img src="upload/<%=vo.getProPic() %>" class="card-img-top" alt="<%=vo.getProName() %>">
+			  <div class="card-body">
+			    <h5 class="card-title"><%=vo.getProName() %></h5>
+			    <p class="card-text"><%=vo.getProSpec() %></p>
+			    <a href="<%=request.getContextPath() %>/GetProductDetailCtrl?proNo=<%=vo.getProNo() %>" class="btn btn-primary">자세히 보기</a>
+			  </div>
+			</div>
+		</li>
+		<% } %>
+	</ul>
 </div>
 <%@ include file="footer.jsp" %>
 </body>

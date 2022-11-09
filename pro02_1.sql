@@ -80,7 +80,9 @@ create table product(
 	proPic varchar(200),
 	proPic2 varchar(200)
 );
-
+alter table product add column scnt int default 0; 
+alter table product add column regdate datetime default now();
+update product set regdate="2022-11-08 15:27:28" where prono>=15 and prono<=16;
 commit;
 select * from product;
 delete from product;
@@ -109,6 +111,9 @@ create table sales(
 
 desc sales;
 select * from sales;
+select * from product where prono in (select prono from sales group by prono order by sum(amount) desc limit 4);
+-- select prono from sales group by prono order by sum(amount) desc limit 4;
+select * from product where prono in (select * from (select prono from sales group by prono order by sum(amount) desc limit 4) as tot);
 
 -- 결제 테이블 생성
 create table payment(

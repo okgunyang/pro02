@@ -20,6 +20,7 @@
 .card-title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .card-text {   overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;
   -webkit-line-clamp: 2;  -webkit-box-orient: vertical; }
+#best li { margin-bottom:24px; }  
 </style>
 </head>
 <body>

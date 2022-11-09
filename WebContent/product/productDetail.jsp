@@ -14,6 +14,7 @@
 
 <style>
 .title { padding-top:36px; padding-bottom:20px; }
+.table tr td { max-width:400px; }
 .table tr td img { max-width:400px; height:auto; }
 </style>
 </head>
@@ -21,6 +22,11 @@
 <%@ include file="../header.jsp" %>
 <%
 	Product vo = (Product) request.getAttribute("pro");
+	if(sid!=null) {
+		sid = sid;
+	} else {
+		sid = "guest";
+	}
 %>
 <div class="container-fluid" id="content">
 	<div class="row" id="content_row">
@@ -81,7 +87,7 @@
 				<a href="<%=request.getContextPath() %>/UpdateProductCtrl?proNo=<%=vo.getProNo() %>" class="btn btn-danger">제품 정보 수정</a>
 				<a href="<%=request.getContextPath() %>/GetProductWearingCtrl?proNo=<%=vo.getProNo() %>" class="btn btn-danger">제품 입고</a>
 				<% } %>
-				<% if(vo.getAmount()!=0) { %>
+				<% if(vo.getAmount()!=0 && sid!="guest") { %>
 				<a href="<%=request.getContextPath() %>/GetSalesProductCtrl?proNo=<%=vo.getProNo() %>" class="btn btn-primary">제품 구매</a>
 				<a href="<%=request.getContextPath() %>/InsertCartCtrl?proNo=<%=vo.getProNo() %>" class="btn btn-info">장바구니 넣기</a>
 				<% } %>
