@@ -56,7 +56,7 @@ public class FileUpload extends HttpServlet {
 
 	      String file1 =(String)files.nextElement();
 	      proPic=multi.getFilesystemName(file1);
-
+	      //proPic = multi.getParameter("myPic1");
 	      if(proPic!=null){
 	    	  proPic=multi.getFilesystemName(file1);
 	      } else {
@@ -65,7 +65,8 @@ public class FileUpload extends HttpServlet {
 	      
 	      String file2 =(String)files.nextElement();
 	      proPic2=multi.getFilesystemName(file2);
-
+	      //proPic = multi.getParameter("myPic2");
+	      
 	      if(proPic2!=null){
 	    	  proPic2=multi.getFilesystemName(file2);
 	      } else {

@@ -31,7 +31,7 @@
 		<main class="content container">
 		<% } %>
 			<h2 class="title">제품 등록</h2>
-			<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/FileUpload" method="post" enctype="multipart/form-data">
+			<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/FileUpload" method="post" enctype="multipart/form-data" onsubmit="return picCheck(this)">
 				<table class="table">
 					<tbody>
 						<tr>
@@ -67,11 +67,17 @@
 						</tr>
 						<tr>
 							<th>제품 이미지1</th>
-							<td><input type="file" name="proPic" id="proPic" accept="image/*" class="form-control" required></td>
+							<td>
+								<input type="file" name="proPic" id="proPic" accept="image/*" class="form-control" required>
+								<input type="hidden" name="myPic1" id="myPic1">
+							</td>
 						</tr>
 						<tr>
 							<th>제품 이미지2</th>
-							<td><input type="file" name="proPic2" id="proPic2" accept="image/*" class="form-control"></td>
+							<td>
+								<input type="file" name="proPic2" id="proPic2" accept="image/*" class="form-control">
+								<input type="hidden" name="myPic2" id="myPic2">
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -81,6 +87,31 @@
 					<a href="<%=request.getContextPath() %>/GetProductListCtrl" class="btn btn-danger">목록으로</a>
 				</div>
 			</form>	
+			<script>
+			function picCheck(f){
+				var pic1 = f.proPic.value;
+				var pic2 = f.proPic2.value;
+				pic1 = pic1.trim();
+				pic2 = pic2.trim();
+				var loc1, loc2;
+				if(pic1!=""){
+					pic1="noimage.jpg";
+				} else {
+					loc1=pic1.lastIndexOf("\\");
+					pic1 = pic1.substr(loc1+1);
+				}
+				if(pic2!=""){
+					pic2="noimage.jpg";
+				} else {
+					loc2 = pic2.lastIndexOf("\\");
+					pic2 = pic2.substr(loc2+1);
+				}
+				f.myPic1.value = pic1;
+				f.myPic2.value = pic2;
+				console.log("myPic1 : "+myPic1);
+				console.log("myPic2 : "+myPic2);
+			}
+			</script>
 		</main>
 	</div>
 </div>
